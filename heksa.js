@@ -2,13 +2,14 @@ function heksadesimal(a) {
     var daftar='0123456789abcdef'.split('')
     // console.log(daftar)
     var result=''
-    for(var i = 0; i < 10000000000;i++){
+    while(a>0){
         result += daftar[(a%16)]
         a=Math.floor(a/16)
         if (a==0) {
             break
         }
     }
+    
     // console.log('ini result',result)
     hasil=''
     for(var i = result.length-1;i>=0;i--){
