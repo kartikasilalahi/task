@@ -5,9 +5,6 @@ function heksadesimal(a) {
     while(a>0){
         result += daftar[(a%16)]
         a=Math.floor(a/16)
-        if (a==0) {
-            break
-        }
     }
     
     // console.log('ini result',result)
