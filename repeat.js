@@ -21,21 +21,20 @@
 // console.log(repeat(['b', 'a', 'c', 'b', 'a'])) // b
 // console.log(repeat(['a', 'a', 'a', 'b', 'b', 'b'])) // a
 
-
+// CARA II
 function repeat(arr) {
-    var result = '';     
+
     for (var i = 0; i < arr.length; i++) {
-        for (var j = 0; j < arr.length; j++) {        
+        for (var j = i+1; j < arr.length; j++) {        
             if (arr[i] == arr[j]) {
-                result += arr[i]
+                return arr[i]
             }            
-            return result
         }
     }
 }
 console.log(repeat(['b', 'b', 'c', 'b', 'a'])) // b
-console.log(repeat(['b', 'a', 'c', 'b', 'a'])) // b
-console.log(repeat(['a', 'a', 'a', 'b', 'b', 'b'])) // a
-console.log(repeat(['a', 'a', 'b', 'b', 'b', 'b'])) // a
+console.log(repeat(['b', 'd', 'c', 'b', 'i'])) // b
+console.log(repeat(['a', 'c', 'c', 'b',])) // c
+console.log(repeat(['a', 'a', 'b', ])) // a
 
 
