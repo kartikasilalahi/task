@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>list todo</title>
+    <style>
+        body{
+            margin: 2em;
+            background-color: #c2bbb8;
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 14px;
+        }
+        tr,td,table{
+            border: 1px solid gray;
+            border-collapse: collapse;
+            padding: 10px
+        }
+        </style>
+</head>
+<body>
+    <center>
+        <h1>Latihan Array of object</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>NO</td>
+                    <td>TODO</td>
+                    <td>HARI</td>
+                    <td>Gambar</td>
+                    <td>ACT</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><input oninput="onBtnSearchclick()" type="text" class="searchtodo"  placeholder=" Enter to do name "/></td>
+                    <td>
+                        <select oninput="onBtnSearchclick()" class="searchtodo">
+                            <option>Allday</option>
+                            <option> Senin</option>
+                            <option> Selasa</option>
+                            <option> Rabu</option>
+                            <option> Kamis</option>
+                            <option> Jumat</option>
+                            <option> Sabtu</option>
+                            <option> Minggu</option>
+                        </select>
+                    </td>
+                    <td><button onclick="onBtnSearchclick()">Search</button> </td>
+                </tr>
+            </tfoot>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="addtodo" placeholder=" Enter to do name"/></td>
+                    <td>
+                        <select class="addtodo">
+                            <option> Senin</option>
+                            <option> Selasa</option>
+                            <option> Rabu</option>
+                            <option> Kamis</option>
+                            <option> Jumat</option>
+                            <option> Sabtu</option>
+                            <option> Minggu</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="addtodo"  placeholder=" Enter image url"></td>
+                    <td><button onclick="onAddTodoClick()">add</button></td>
+                </tr>
+            </tfoot>
+        </table>
+    </center>
+
+</body>
+<script>
+    class Todo{
+        constructor(a,b,c){
+            this.kegiatan=a,
+            this.hari=b,
+            this.gambar=c
+        }
+    }
+
+    var listdata = [
+        new Todo('Tidur', 'Senin', 'https://foto.wartaekonomi.co.id/files/arsip_foto_2019_06_12/tidur_125754_big.jpg'),
+        new Todo('Renang', 'Jumat', 'https://i1.wp.com/www.romadecade.org/wp-content/uploads/2019/01/bedagaya.jpg?resize=720%2C330&ssl=1'),
+        new Todo('Holiday', 'Sabtu', 'https://theundercoverrecruiter.com/wp-content/uploads/2015/07/holiday.jpg'),
+        new Todo('Nongkrong', 'Minggu', 'https://4.bp.blogspot.com/-hXy5HpARC9E/VswjA2cVITI/AAAAAAAAGRE/T39uNe8fm7M/s1600/Kunjungi%2B7%2BTempat%2BNongkrong%2Bdi%2BSurabaya%2BPaling%2BPopuler.png'),
+        new Todo('Tidur', 'Minggu', 'https://foto.wartaekonomi.co.id/files/arsip_foto_2019_06_12/tidur_125754_big.jpg'),
+    ]
+    var indexedit=-1
+    var inddexdel=-2
+    const Printdata=(a)=>{
+        var output=''
+        a.forEach((val,index) => {
+            if(index==indexedit){
+                output+=`<tr>
+                            <td>${index+1}</td>
+                            <td><input type="text" id="edittodo${index}"></td>
+                            <td>
+                                <select id="edithari${index}">
+                                    <option> Senin</option>
+                                    <option> Selasa</option>
+                                    <option> Rabu</option>
+                                    <option> Kamis</option>
+                                    <option> Jumat</option>
+                                    <option> Sabtu</option>
+                                    <option> Minggu</option>
+                                </select>    
+                            </td>
+                            <td><input type="text" id="editimg${index}"></td>
+                            <td><button onclick="cancel()">cancel</button>
+                                <button onclick="save(${index})">save</button></td>
+                        </tr>`
+            }else if(index==inddexdel){
+                output+=`<tr>
+                            <td>${index+1}</td>
+                            <td>${val.kegiatan}</td>
+                            <td>${val.hari}</td>
+                            <td><img src=${val.gambar} height='100px width='170px''/></td>
+                            <td><button onclick="cancelDel()">No</button>
+                                <button onclick="confirmDel(${index})">Yes</button></td>
+                        </tr>`
+            }else{
+                output+=`<tr>
+                            <td>${index+1}</td>
+                            <td>${val.kegiatan}</td>
+                            <td>${val.hari}</td>
+                            <td><img src=${val.gambar} height='100px' width='170px'></td>
+                            <td><button onclick="hapus(${index})">delete</button>
+                                <button onclick="edit(${index})">edit</button></td>
+                        </tr>`
+            }
+        });
+        document.getElementsByTagName('tbody')[0].innerHTML=output
+    }
+    Printdata(listdata)
+
+    const hapus=(bebas)=>{
+        inddexdel=bebas
+        console.log(inddexdel)
+        Printdata(listdata)
+    }
+    const cancelDel=()=>{
+        inddexdel=-2
+        Printdata(listdata)
+    }
+    const confirmDel=(bebas)=>{
+        listdata.splice(bebas,1)
+        Printdata(listdata)
+    }
+    const edit=(bebas)=>{
+        indexedit=bebas
+        Printdata(listdata)
+        console.log(bebas)
+        console.log(indexedit)
+
+    }
+    const cancel=()=>{
+        indexedit=-1
+        console.log(indexedit)
+        Printdata(listdata)
+    }
+
+
+    const save=(bebas)=>{
+        var newtodo=document.getElementById(`edittodo${bebas}`).value
+        var newhari=document.getElementById(`edithari${bebas}`).value
+        var newimg=document.getElementById(`editimg${bebas}`).value
+        console.log(newtodo,newhari,newimg)
+        if(newtodo){
+            listdata[bebas].kegiatan=newtodo
+        }
+        if(newhari!==listdata[bebas].hari){
+            listdata[bebas].hari=newhari
+        }
+        if(newimg){
+            listdata[bebas].gambar=newimg
+        }
+        indexedit=-1
+        Printdata(listdata)
+    }
+    const onAddTodoClick=()=>{
+        var input=document.getElementsByClassName('addtodo')
+        var todobaru=input[0].value
+        var haribaru=input[1].value
+        var imagebaru=input[2].value
+        listdata.push(new Todo(todobaru,haribaru,imagebaru))
+        Printdata(listdata)
+    }
+    const onBtnSearchclick=()=>{
+        var input=document.getElementsByClassName("searchtodo")
+        var namasearch=input[0].value
+        var hariSearch=input[1].value
+        var newarr=listdata.filter((val)=>val.kegiatan.toLowerCase().startsWith(namasearch.toLowerCase())&&(val.hari.toLowerCase().startsWith(hariSearch.toLowerCase())||hariSearch=='Allday'))
+        // console.log(newarr)
+        Printdata(newarr)
+    }
+
+</script>
+</html>

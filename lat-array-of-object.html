@@ -1,0 +1,200 @@
+<!-- TO DO LIST -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>my to do list</title>
+    <!-- style -->
+    <style>
+        body{
+            margin: 2em;
+            background-color: #a7a09d7b;
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 14px;
+        }
+        tr,td,table{
+            border: 1px solid gray;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Latihan Array of Object</h1>
+        <!-- table -->
+        <table>
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Kegiatan</td>
+                    <td>Hari</td>
+                    <td>Gambar</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class='addtodo' placeholder=" input nama kegiatan"></td>
+                    <td>
+                        <select class = 'addtodo'>
+                            <option>Senin</option>
+                            <option>Selasa</option>
+                            <option>Rabu</option>
+                            <option>Kamis</option>
+                            <option>Jumat</option>
+                            <option>Sabtu</option>
+                            <option>Minggu</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class='addtodo' placeholder=" input image address/url"></td>
+                    <td><button onclick="onAddTodoClick()">add</button></td>
+                </tr>
+            </tfoot>
+        </table>
+        <br>
+        <input type="text" id='cari' placeholder=" cari kegiatan disini">
+        <button onclick="carikan()">Cari</button>
+        <br><br>
+        <!-- option hari -->
+        <select id = 'carihari'>
+                <option>Senin</option>
+                <option>Selasa</option>
+                <option>Rabu</option>
+                <option>Kamis</option>
+                <option>Jumat</option>
+                <option>Sabtu</option>
+                <option>Minggu</option>
+        </select>
+        <button onclick="carikan()">Cari Hari</button>
+        <br><br>
+        <button onclick="reset()">Reset</button>
+    </center>
+</body>
+<script>
+    // class untuk menampung listdata
+    class Todo{
+        constructor(a,b,c){
+            this.kegiatan=a,
+            this.hari=b,
+            this.gambar=c
+        }
+    }
+    var listdata = [
+        new Todo('Tidur', 'Senin', 'https://foto.wartaekonomi.co.id/files/arsip_foto_2019_06_12/tidur_125754_big.jpg'),
+        new Todo('Renang', 'Jumat', 'https://i1.wp.com/www.romadecade.org/wp-content/uploads/2019/01/bedagaya.jpg?resize=720%2C330&ssl=1'),
+        new Todo('Holiday', 'Sabtu', 'https://theundercoverrecruiter.com/wp-content/uploads/2015/07/holiday.jpg'),
+        new Todo('Nongkrong', 'Minggu', 'https://4.bp.blogspot.com/-hXy5HpARC9E/VswjA2cVITI/AAAAAAAAGRE/T39uNe8fm7M/s1600/Kunjungi%2B7%2BTempat%2BNongkrong%2Bdi%2BSurabaya%2BPaling%2BPopuler.png'),
+        new Todo('Tidur', 'Minggu', 'https://foto.wartaekonomi.co.id/files/arsip_foto_2019_06_12/tidur_125754_big.jpg'),
+    ]
+    // function printdata untuk menampilkan isi dari data yg tertuang di dlm table
+    const Printdata=(a)=>{
+        var output = ''
+        a.forEach((val,index) => {
+            output += `<tr>
+                    <td>${index+1}</td>
+                    <td>${val.kegiatan}</td>
+                    <td>${val.hari}</td>
+                    <td><img src = ${val.gambar} height="100px" width="170px"/></td>
+                    <td><button onclick=deleteData(${index})>Delete</button>
+                        <button onclick=editData(${index})>Edit</button></td>
+                </tr>`
+        });
+        document.getElementsByTagName('tbody')[0].innerHTML=output
+    }
+    Printdata(listdata)
+    // function saat klik button add
+    const onAddTodoClick=()=>{
+        var input = document.getElementsByClassName('addtodo')
+        var todobaru = input[0].value
+        var haribaru = input[1].value
+        var imgbaru = input[2].valueTodo
+        // console.log(todobaru);
+        // console.log(haribaru);
+        // console.log(imgbaru);        
+        listdata.push(new Todo(todobaru, haribaru, imgbaru))
+        Printdata(listdata)
+        document.getElementsByClassName('addtodo')[0].value = ''
+        document.getElementsByClassName('addtodo')[2].value = ''
+    }
+    // function saat klik button delete
+    const deleteData=(index)=>{
+        let hapus = confirm(`Yakin Hapus Kegiatan ${listdata[index].kegiatan}?`)
+        if (hapus) {
+            listdata.splice(index, 1)
+            Printdata(listdata)
+        } else {
+            Printdata(listdata)
+        }
+    }
+    // function saat klik button edit
+    const editData=(index)=>{
+        while (true) {
+            var menuedit = prompt('Mau edit yang mana?\n1. Kegiatan\n2. Hari\n3. Gambar\n4. Semuanya\n5. Gajadi')
+            if (menuedit==1) {
+                let editkegiatan = prompt(`Mau ganti ${listdata[index].kegiatan} jadi apa?`)
+                listdata[index].kegiatan = editkegiatan
+                Printdata(listdata)
+                break
+            } else if (menuedit==2) {
+                let edithari = prompt(`Mau ganti jadi hari apa?`)
+                listdata[index].hari = edithari
+                Printdata(listdata)
+                break
+            } else if (menuedit == 3) {
+                let editgambar = prompt(`Isi image address yang baru`)
+                listdata[index].gambar = editgambar
+                Printdata(listdata)
+                break
+            } else if (menuedit == 4) {
+                let editkegiatan = prompt(`Mau ganti ${listdata[index].kegiatan} jadi apa?`)
+                listdata[index].kegiatan = editkegiatan
+                let edithari = prompt(`Mau ganti jadi hari apa?`)
+                listdata[index].hari = edithari
+                let editgambar = prompt(`Isi image address yang baru`)
+                listdata[index].gambar = editgambar
+                Printdata(listdata)
+                break;
+            } else if (menuedit == 5) {
+                break;
+            } else {
+                alert('Gada pilihannya!')
+            }
+        }
+    }
+    // funcion saat klik button cari data(berdasarkan nama kegiatan)
+    const carikan=()=>{
+        var x = listdata.filter((query) => (query.kegiatan) == document.getElementById('cari').value)
+        // console.log(listdata.kegiatan)
+        Printdata(x)
+        document.getElementById('cari').value = ''
+
+    }
+    // funcion saat klik button cari data(berdasarkan hari)  
+    const carikanhari=()=>{
+        var hari = listdata.filter(x=>x.hari==document.getElementById('carihari').value)
+        Printdata(hari)
+    }
+    
+    // const cari=()=>{
+    //     var input = document.getElementById('cari')
+    //     var cariharinya = input[1].value
+    //     for(var i = 0; i < listdata.length; i++){
+    //         if (listdata[i].kegiatan.toLowerCase() == cariharinya.toLowerCase()) {
+    //             return listdata[i]
+    //         }
+    //     }
+    // }
+    
+    // function untuk reset
+    const reset=()=>{
+        Printdata(listdata)
+    }
+</script>
+</html>

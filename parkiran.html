@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Masuk: <input id = 'masuk' type="number" placeholder=" isi jam masuk ">
+    <input type="radio" name = 'saatMasuk' value="am"> am
+    <input type="radio" name = 'saatMasuk' value="pm"> pm 
+    </p> 
+    <p>Keluar: <input id = 'keluar' type="number" placeholder=" isi jam keluar ">
+    <input type="radio" name = 'saatKeluar' value="am"> am
+    <input type="radio" name = 'saatKeluar' value="pm"> pm 
+    </p> 
+    <button id = 'klik' onclick="biaya(this.value)">Biaya</button>
+    <p id = 'output'></p>
+
+</body>
+    <script>
+        var biaya=()=>{
+            var jammasuk = parseInt(document.getElementById('masuk').value)
+            var jamkeluar = parseInt(document.getElementById('keluar').value)
+            var kapanMasuk = ''
+            var kapanKeluar = ''
+            // untuk ngecek saatmasuk (am/pm)
+            if (document.getElementsByName('saatMasuk')[0].checked) {
+                kapanMasuk += 'am'
+            } else if (document.getElementsByName('saatMasuk')[1].checked){
+                kapanMasuk += 'pm'
+            }
+            // untuk ngecek saatkeluar (am/pm)
+            if (document.getElementsByName('saatKeluar')[0].checked) {
+                kapanKeluar += 'am'
+            } else if (document.getElementsByName('saatKeluar')[1].checked){
+                kapanKeluar += 'pm'
+            }
+            
+            if ((jammasuk >= jamkeluar || jammasuk <= jamkeluar ) && kapanMasuk != kapanKeluar) {
+                jamkeluar += 12
+            } else if (jammasuk >= jamkeluar && kapanMasuk == kapanKeluar) {
+                jamkeluar += 24
+            } 
+
+            console.log(jammasuk)
+            console.log(jamkeluar)
+
+            var lama = jamkeluar-jammasuk
+            var bayar = lama*1000
+            document.getElementById('output').innerHTML = `Parkir selama ${lama} jam, biayanya Rp.${bayar}`
+        }
+
+    </script>
+</html>
