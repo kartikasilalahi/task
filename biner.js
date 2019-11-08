@@ -1,6 +1,6 @@
 function biner(a) {
     var x = ''
-    while(a>1){
+    while(a>0){
         x += a%2
         a=Math.floor(a/2)
     }
@@ -8,9 +8,9 @@ function biner(a) {
     for(var i = x.length-1; i>=0; i--){
         result += x[i]
     }
-    return 1+result
+    return result
 }
-console.log(biner(500)) // 1111101
+console.log(biner(500)) // 11110100
 console.log(biner(8)) // 1000
 console.log(biner(23)) // 10111
 console.log(biner(50)) // 110010
