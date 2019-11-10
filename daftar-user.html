@@ -145,16 +145,8 @@
     }
     // sort by age
     const sortByage=()=>{
-        var b = 'age'
-        for(var i = 0; i < listuser.length; i++){
-            for(var j = 0; j < listuser.length; j++){
-                if (listuser[i][b]< listuser[j][b]) {
-                    var tampung = listuser[i]
-                    listuser[i] = listuser[j]
-                    listuser[j] = tampung
-                }
-            }
-        }
+        var x = 'age'
+        listuser=mysort(listuser, x)      
         document.getElementById('output').innerHTML=listuser
         showData(listuser)
     }
