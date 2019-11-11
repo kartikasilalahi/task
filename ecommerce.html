@@ -35,7 +35,8 @@
         <h4></h4>
         <table id='output'></table>
         <p id="checkout"></p>
-        <p id=bayar></p>
+        <p id="timer"></p>
+        <p id="bayar"></p>
     </center>
     
 </body>
@@ -99,9 +100,9 @@
             if(kosong){
                 document.getElementById('bayar').innerHTML=''
             } else {
-                document.getElementsByTagName('p')[0].innerHTML='<button  onclick="btnCheckout()" > Checkout</button>'
+                document.getElementsByTagName('p')[0].innerHTML='<button  onclick="btnCheckout(),btnTimer()" > Checkout</button>'
             }
-    }
+    }  
     Printchart(listChart)
 
     const btnAddChart=(index)=>{
@@ -123,7 +124,27 @@
     const btnCheckout=()=>{
         document.getElementById('bayar').innerHTML=`<input id='uang' type="number" placeholder="masukkan nominal"> <button onclick="btnBayar()">Bayar</button>`
         document.getElementsByTagName('p')[0].innerHTML=''
+    }
 
+    var time = 30
+    var timer
+    const btnTimer=()=>{
+        time = time + 1
+        timer = setInterval(waktu, 1000)
+    }
+
+    const waktu=()=>{
+        time--
+        document.getElementById('timer').innerHTML=`waktu tersisa ${time}`
+        if (time <= -1) {
+            alert('waktunya habis')
+            clearInterval(timer)
+            listChart=[]
+            Printchart(listChart)
+            document.getElementById('bayar').innerHTML=''
+            document.getElementById('timer').innerHTML=''
+            time = 30
+        }
     }
 
     const btnBayar=()=>{
@@ -133,20 +154,26 @@
             total += listChart[i]['harga']
         }
         var sisa = Math.abs(uangAnda-total)
-        if (uangAnda > total) {
+        if (uangAnda < total){
+            alert('Uang anda kurang! Silahkan masukkan lagi sesusai nominal total')
+            document.getElementById('uang').value=''
+        } else if (uangAnda > total) {
             alert('Uang anda lebih. kembaliannya Rp' + sisa)
             alert('Transaksi berhasil! Tksh sudah belanja!')
             listChart=[]
             Printchart(listChart)
             document.getElementById('bayar').innerHTML=''
-        } else if (uangAnda < total){
-            alert('Uang anda kurang! Silahkan masukkan lagi sesusai nominal total')
-            document.getElementById('uang').value=''
+            clearInterval(timer)
+            document.getElementById('timer').innerHTML=''
+            time = 30
         } else {
             alert('Transaksi berhasil! Tksh sudah belanja!')
             listChart=[]
             Printchart(listChart)
             document.getElementById('bayar').innerHTML=''
+            clearInterval(timer)
+            document.getElementById('timer').innerHTML=''
+            time = 30
         }
     }
 
