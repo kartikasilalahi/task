@@ -24,6 +24,7 @@
         th{
             background-color: gray;
         }
+
         #cover{
             border: 2px solid;
             margin: 1em 34em;
@@ -72,7 +73,7 @@
                             <th>Age</th>
                             <th>Gender</th>
                             <th>Job</th></tr>
-                        <tr><td> <center>${index+1}</center></td>
+                        <tr><td><center>${index+1}</center></td>
                             <td>${val.name}</td>
                             <td><center>${val.age}</center></td>
                             <td>${val.gender}</td>
@@ -146,7 +147,7 @@
     // sort by age
     const sortByage=()=>{
         var x = 'age'
-        listuser=mysort(listuser, x)      
+        listuser=mysort(listuser, x)
         document.getElementById('output').innerHTML=listuser
         showData(listuser)
     }
