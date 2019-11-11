@@ -68,7 +68,6 @@
     Printdata(listProduk)
 
     var listChart = []
-    // var objectHarga = {}
     const Printchart=(a)=>{
         // console.log(a)
         var jumlah = 0
@@ -87,6 +86,7 @@
                 jumlah++
             });
             if (jumlah == 0) {
+                document.getElementsByTagName('p')[0].innerHTML=''
                 kosong=true
                 document.getElementsByTagName('h3')[0].innerHTML='Belanjaan kamu KOSONG'
                 document.getElementsByTagName('h4')[0].innerHTML=''
@@ -97,14 +97,10 @@
             }
             document.getElementById('output').innerHTML=output     
             if(kosong){
-                // document.getElementById('bayar').innerHTML=''
-               document.getElementById('bayar').innerHTML=''
+                document.getElementById('bayar').innerHTML=''
             } else {
                 document.getElementsByTagName('p')[0].innerHTML='<button  onclick="btnCheckout()" > Checkout</button>'
-                // document.getElementById('bayar').innerHTML=`<input id='uang' type="number" placeholder="masukkan nominal"> <button onclick="btnBayar()">bayar</button>`
             }
-
-            return totalHarga
     }
     Printchart(listChart)
 
@@ -137,16 +133,13 @@
             total += listChart[i]['harga']
         }
         var sisa = Math.abs(uangAnda-total)
-        console.log(uangAnda)
-        console.log(total)
-
         if (uangAnda > total) {
-            alert('Uang anda lebih. kembalian ' + sisa)
+            alert('Uang anda lebih. kembalian ' + sisa + ', Silahkan masukkan lagi sesusai nominal total')
             listChart=[]
             Printchart(listChart)
             document.getElementById('bayar').innerHTML=''
         } else if (uangAnda < total){
-            alert('Uang anda kurang ' + sisa + ', silahkan masukkan sesusai nominal total')
+            alert('Uang anda kurang ' + sisa + ', Silahkan masukkan lagi sesusai nominal total')
             document.getElementById('uang').value=''
         } else {
             alert('Tksh sudah belanja!')
@@ -154,7 +147,6 @@
             Printchart(listChart)
             document.getElementById('bayar').innerHTML=''
         }
-
     }
 
 </script>
