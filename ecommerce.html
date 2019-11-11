@@ -93,7 +93,7 @@
             } else {
                 kosong=false
                 document.getElementsByTagName('h3')[0].innerHTML='Belanjaan kamu ' + jumlah
-                document.getElementsByTagName('h4')[0].innerHTML='Total yang harus kamu bayar ' + totalHarga
+                document.getElementsByTagName('h4')[0].innerHTML='Total yang harus kamu bayar Rp.' + totalHarga
             }
             document.getElementById('output').innerHTML=output     
             if(kosong){
@@ -134,15 +134,16 @@
         }
         var sisa = Math.abs(uangAnda-total)
         if (uangAnda > total) {
-            alert('Uang anda lebih. kembalian ' + sisa + ', Silahkan masukkan lagi sesusai nominal total')
+            alert('Uang anda lebih. kembaliannya Rp' + sisa)
+            alert('Transaksi berhasil! Tksh sudah belanja!')
             listChart=[]
             Printchart(listChart)
             document.getElementById('bayar').innerHTML=''
         } else if (uangAnda < total){
-            alert('Uang anda kurang ' + sisa + ', Silahkan masukkan lagi sesusai nominal total')
+            alert('Uang anda kurang! Silahkan masukkan lagi sesusai nominal total')
             document.getElementById('uang').value=''
         } else {
-            alert('Tksh sudah belanja!')
+            alert('Transaksi berhasil! Tksh sudah belanja!')
             listChart=[]
             Printchart(listChart)
             document.getElementById('bayar').innerHTML=''
