@@ -61,7 +61,7 @@
                     <td>${val.nama}</td>
                     <td>${val.harga}</td>
                     <td><img src = ${val.gambar} height="120px" width="110px"/></td>
-                    <td><button onclick="btnAddChart(${index})"> add to chart</button></td>
+                    <td><button onclick="btnAddChart(${index})"> add to cart</button></td>
                 </tr>`
         });
         document.getElementsByTagName('tbody')[0].innerHTML=output
@@ -82,7 +82,7 @@
                 <td>${val.nama}</td>
                 <td>${val.harga}</td>
                 <td><img src = ${val.gambar} height="50px" width="50px"/></td>
-                <td><button onclick="deleteChart(${index})"> delete from chart</button></td>
+                <td><button onclick="deleteChart(${index})"> delete from cart</button></td>
                 </tr>`
                 jumlah++
             });
@@ -106,7 +106,7 @@
     Printchart(listChart)
 
     const btnAddChart=(index)=>{
-        var konfirmasiAdd = confirm(`Tambah ${listProduk[index].nama} ke chart?`)
+        var konfirmasiAdd = confirm(`Tambah ${listProduk[index].nama} ke cart?`)
         if (konfirmasiAdd) {
             listChart.push(listProduk[index])
         } 
