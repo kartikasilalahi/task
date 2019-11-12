@@ -10,4 +10,5 @@ console.log(getMiddle('get')) // e
 console.log(getMiddle('gets')) // et
 console.log(getMiddle('kartika')) // t
 console.log(getMiddle('getmiddlee')) // id
+console.log(getMiddle('a'))
 

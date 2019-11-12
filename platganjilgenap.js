@@ -7,9 +7,9 @@ const ganjilgenap=(plat, tgl)=>{
         return 'tidak boleh lewat'
     }
 }
-console.log(ganjilgenap('be 1234', 24)) // boleh lewat
-console.log(ganjilgenap('be 1', 24)) // tidak boleh lewat
-console.log(ganjilgenap('b 11234567342', 13)) // tidak boleh lewat
-console.log(ganjilgenap('be 123411199', 1)) // boleh lewat
+console.log(ganjilgenap('be 1234 asc', 24)) // boleh lewat
+console.log(ganjilgenap('be 1 dgf', 24)) // tidak boleh lewat
+console.log(ganjilgenap('b 11234567342 df', 13)) // tidak boleh lewat
+console.log(ganjilgenap('be 123411199 df', 1)) // boleh lewat
 
 
