@@ -61,7 +61,7 @@
                     <td>${val.nama}</td>
                     <td>${val.harga}</td>
                     <td><img src = ${val.gambar} height="120px" width="110px"/></td>
-                    <td><button onclick="btnAddChart(${index})"> add to cart</button></td>
+                    <td><button onclick="btnAddCart(${index})"> add to cart</button></td>
                 </tr>`
         });
         document.getElementsByTagName('tbody')[0].innerHTML=output
@@ -69,7 +69,7 @@
     Printdata(listProduk)
 
     var listChart = []
-    const Printchart=(a)=>{
+    const PrintCart=(a)=>{
         // console.log(a)
         var jumlah = 0
         var totalHarga = 0
@@ -82,7 +82,7 @@
                 <td>${val.nama}</td>
                 <td>${val.harga}</td>
                 <td><img src = ${val.gambar} height="50px" width="50px"/></td>
-                <td><button onclick="deleteChart(${index})"> delete from cart</button></td>
+                <td><button onclick="deleteCart(${index})"> delete from cart</button></td>
                 </tr>`
                 jumlah++
             });
@@ -103,22 +103,22 @@
                 document.getElementsByTagName('p')[0].innerHTML='<button  onclick="btnCheckout(),btnTimer()" > Checkout</button>'
             }
     }  
-    Printchart(listChart)
+    PrintCart(listChart)
 
-    const btnAddChart=(index)=>{
+    const btnAddCart=(index)=>{
         var konfirmasiAdd = confirm(`Tambah ${listProduk[index].nama} ke cart?`)
         if (konfirmasiAdd) {
             listChart.push(listProduk[index])
         } 
-        Printchart(listChart)
+        PrintCart(listChart)
     }
-    const deleteChart=(index)=>{
+    const deleteCart=(index)=>{
         let hapus = confirm(`Yakin Hapus ${listChart[index].nama}?`)
         if (hapus) {
             listChart.splice(index, 1)
-            Printchart(listChart)
+            PrintCart(listChart)
         } else {
-            Printchart(listChart)
+            PrintCart(listChart)
         }
     }
     const btnCheckout=()=>{
@@ -140,7 +140,7 @@
             alert('waktunya habis')
             clearInterval(timer)
             listChart=[]
-            Printchart(listChart)
+            PrintCart(listChart)
             document.getElementById('bayar').innerHTML=''
             document.getElementById('timer').innerHTML=''
             time = 30
@@ -161,7 +161,7 @@
             alert('Uang anda lebih. kembaliannya Rp' + sisa)
             alert('Transaksi berhasil! Tksh sudah belanja!')
             listChart=[]
-            Printchart(listChart)
+            PrintCart(listChart)
             document.getElementById('bayar').innerHTML=''
             clearInterval(timer)
             document.getElementById('timer').innerHTML=''
@@ -169,7 +169,7 @@
         } else {
             alert('Transaksi berhasil! Tksh sudah belanja!')
             listChart=[]
-            Printchart(listChart)
+            PrintCart(listChart)
             document.getElementById('bayar').innerHTML=''
             clearInterval(timer)
             document.getElementById('timer').innerHTML=''
