@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bintang</title>
+</head>
+<style>
+    html{ 
+        background-color: rgb(173, 173, 173);
+    }
+        tr,td,table{
+            border: black 2px solid;
+            border-collapse: collapse;
+            padding: 10px;
+            background-color: white;
+        }
+</style>
+<body>
+    <center>
+        <h1>Drawing tools</h1>
+        <table><tr><td>
+                    1. Diamond<br> <br>
+                    2. Segitiga siku rata kiri<br><br>
+                    3. Segitiga siku rata kanan<br><br>
+                    4. Persegi<br><br>
+                    5. Piramida<br><br>
+                    <strong> Silahkan input:<br><br></strong>
+                    <input id="pilihan" type="number" placeholder=" masukkan kode jenis"><br><br>
+                    <input id="ukuran" type="number" placeholder=" masukkan ukurannya"><br><br>
+                    <button onclick="tampilkan()"> klik</button>
+                    <p></p>
+                    <center><p></p></center>
+                    <p></p>
+
+        </td></tr></table>
+    </center>
+    
+</body>
+<script>
+    const tampilkan=()=>{
+        var pilihan=document.getElementById('pilihan').value
+        var ukuran=document.getElementById('ukuran').value
+        document.getElementsByTagName('p')[0].innerHTML=`<strong>Hasilnya:</strong>`
+        // ======diamond======
+        if (pilihan == 1) {
+            output = ''
+            for (i = 0; i < ukuran; i++) {
+                for (j = (ukuran - 1); j > i; j--) {
+                    output += '  '
+                }
+                for (j = 0; j <= i; j++) {
+                    output += '*'
+                }
+                for (j = 1; j <= i; j++) {
+                    output += '*'
+                }
+                output += '<br>'
+            }
+            for (i = 0; i < (ukuran - 1); i++) {
+                for (j = 0; j < (i + 1); j++) {
+                    output += '  '
+                }
+                for (j = (ukuran - 1); j > i; j--) {
+                    output += '*'
+                }
+                for (j = (ukuran - 2); j > i; j--) {
+                    output += '*'
+                }
+                output += '<br>'
+        }
+        document.getElementsByTagName('p')[1].innerHTML = output
+        document.getElementsByTagName('p')[2].innerHTML=''
+        }
+        // ======siku rata kiri======
+        else if (pilihan==2) {
+            var output = ''
+            for(var i = 0; i < ukuran; i++){
+                for(var j = 0; j <= i; j++){
+                    output += `*`
+                }
+                output += `<br>`
+            }
+            document.getElementsByTagName('p')[2].innerHTML=output
+            document.getElementsByTagName('p')[1].innerHTML=''
+        }
+        // ======siku rata kanan======
+        else if (pilihan==3) {
+            var output = '';
+            for (var i = 0; i < ukuran; i++) {
+                for (var j = ukuran; j > i; j--) {
+                    output += "&nbsp;&nbsp;&nbsp;";
+                }
+                for (j = 0; j <= i; j++) {
+                    output += "* "
+                }
+                output += '<br>'
+            }
+            document.getElementsByTagName('p')[1].innerHTML=output
+            document.getElementsByTagName('p')[2].innerHTML=''         
+        }
+        // ======persegi======
+        else if (pilihan==4) {
+            var output=''
+            for(var i = 0; i < ukuran; i++){
+                for(var j = 0; j < ukuran; j++){
+                    output += '*'
+                }
+                output += `<br>`
+            }
+            document.getElementsByTagName('p')[1].innerHTML=output
+            document.getElementsByTagName('p')[2].innerHTML=''
+        }
+        // ======piramida======
+        else if (pilihan == 5) {
+            output = ''
+            for (i = 0; i < ukuran; i++) {
+                for (j = (ukuran - 1); j > i; j--) {
+                    output += '  '
+                }
+                for (j = 0; j <= i; j++) {
+                    output += '*'
+                }
+                for (j = 1; j <= i; j++) {
+                    output += '*'
+                }
+                output += '<br>'
+            }
+            document.getElementsByTagName('p')[1].innerHTML = output
+            document.getElementsByTagName('p')[2].innerHTML=''
+        } else {
+            alert(`Tidak ada pilihan! Masukkan pilihan yang tersesdia.`)
+            document.getElementsByTagName('p')[2].innerHTML=''
+            document.getElementsByTagName('p')[1].innerHTML=''
+            document.getElementsByTagName('p')[0].innerHTML=''
+        }
+        document.getElementById('pilihan').value=''
+        document.getElementById('ukuran').value=''
+    }
+    </script>
+</html>
