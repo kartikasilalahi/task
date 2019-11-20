@@ -1,0 +1,44 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.header, .footer{
+    background-color: #322a2e;
+    height: 10vh;
+}
+
+.header h1 , .footer h2 {
+	position: relative;
+    top: 25%;
+    color:#c1c1c1;
+}
+
+.container {
+	height: 80vh;
+	display: flex;
+}
+
+.container .sidebar {
+    padding-top: 20px;
+	background-color: #525659;
+	width: 15%;
+}
+
+.sidebar h3{
+    color:#c1c1c1;
+}
+
+.container .content {
+    padding-top: 20px;
+	background-color: #e0dcda;
+	width: 85%;
+}
+
+h1, h2, h3, p {
+    padding-left: 20px;
+}
+p {
+    padding-right: 20px;
+    padding-top: 5px;
+}
